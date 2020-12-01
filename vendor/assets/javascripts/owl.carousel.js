@@ -2336,9 +2336,12 @@
 					});
 				} else {
 					tnLink = $( '<div/>', {
-						"class": "owl-video-tn",
-						"style": 'opacity:1;background-image:url(' + path + ')'
+						"class": "owl-video-tn"
 					});
+					var style = document.createElement("style");
+					style.innerHTML = ".owl-video-tn{opacity:1;background-image:url(" + path + ")}";
+					style.setAttribute('nonce', gon.style_nonce);
+					document.getElementsByTagName('head')[0].appendChild(style);
 				}
 				target.after(tnLink);
 				target.after(icon);
@@ -2347,8 +2350,12 @@
 		// wrap video content into owl-video-wrapper div
 		target.wrap( $( '<div/>', {
 			"class": "owl-video-wrapper",
-			"style": dimensions
 		}));
+
+		var style_target = document.createElement("style");
+		style_target.innerHTML = ".owl-video-wrapper{" + dimensions + "}";
+		style_target.setAttribute('nonce', gon.style_nonce);
+		document.getElementsByTagName('head')[0].appendChild(style_target);
 
 		if (this._core.settings.lazyLoad) {
 			srcType = 'data-src';
